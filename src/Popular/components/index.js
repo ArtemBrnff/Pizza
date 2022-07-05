@@ -54,7 +54,7 @@ const Popular = (props) => {
             <Container className={classes.d_container}>
                 {pizzas && pizzas.map((item) => <CardContainer item={item} key={item.id} />)}
             </Container>
-            <Button onClick={addPizza}>Add Pizza</Button>
+            <Button onClick={addPizza}>Add Pizzaaaaaaaaaaaaaaaaaaa</Button>
         </Box>
     )
 }
