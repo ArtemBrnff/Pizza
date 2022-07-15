@@ -1,10 +1,12 @@
 import { Box, Container, Typography } from "@material-ui/core";
 import React, { useState } from "react";
-import SetCard from "./SetCard";
-import { useStyles } from "./styles";
+import { ISets } from "./Interfaces/interfaces";
+import SetCard from "./Sets/components/SetCard";
+import { useStyles } from "./Sets/components/styles";
 
-const Sets = () => {
-    const [sets] = useState([
+
+const Test = () => {
+    const [sets] = useState<ISets[]>([
         {
             img: 'https://pizza.od.ua/upload/resize_cache/iblock/0e3/640_400_1/0e39d89f88d5ef7125d416842ba9e46c.jpg',
             name: 'Папперони + Калифорния',
@@ -28,4 +30,4 @@ const Sets = () => {
         </Box>
     )
 }
-export default Sets
+export default Test

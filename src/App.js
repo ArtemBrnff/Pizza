@@ -6,8 +6,10 @@ import Login from './Login';
 import MyAccount from './MyAccount';
 import Pizzas from './Pizzas/component';
 import Popular from './Popular/components';
-import Sets from './Sets/components';
-import ShoppingCart from './ShoppingCart/components';
+import Sets from './Sets/components/index.tsx';
+ 
+import ShoppingCart from './ShoppingCart/components/index.tsx';
+
 
 const App = () => {
   return (
@@ -19,7 +21,7 @@ const App = () => {
             <Route path="/" element={<Popular />} />
             <Route path="/discounts" element={<Discounts />} />
             <Route path="/pizzas" element={<Pizzas />} />
-            <Route path="/sets" element={<Sets />} />
+            <Route path="/sets" element={<Sets/>} />
             <Route path="/shoppingcart" element={<ShoppingCart />} />\
             <Route path="/login" element={<Login />} />
             <Route path="/myaccount" element={<MyAccount />} />
