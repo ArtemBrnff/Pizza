@@ -30,20 +30,20 @@ const Popular = (props) => {
                 id: 3
             },
         ])
-        localStorage.setItem('pizza', JSON.stringify([
-            ...pizzas,
-            {
-                name: 'Піца Тоні Пепероні', compound: "Соус Domino's, Пепероні, Моцарела",
-                url: 'https://instafood.com.ua/images/images/pitsa-pepperoni.jpg', price: 150, weight: '390 г',
-                id: 3
-            },
-        ]))
+        // localStorage.setItem('pizza', JSON.stringify([
+        //     ...pizzas,
+        //     {
+        //         name: 'Піца Тоні Пепероні', compound: "Соус Domino's, Пепероні, Моцарела",
+        //         url: 'https://instafood.com.ua/images/images/pitsa-pepperoni.jpg', price: 150, weight: '390 г',
+        //         id: 3
+        //     },
+        // ]))
     }
 
-    useEffect(() => {
-        const pizza = localStorage.getItem('pizza')
-        setPizzas(JSON.parse(pizza))
-    }, [])
+    // useEffect(() => {
+    //     const pizza = localStorage.getItem('pizza')
+    //     setPizzas(JSON.parse(pizza))
+    // }, [])
 
     return (
         <Box>
