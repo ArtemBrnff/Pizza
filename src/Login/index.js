@@ -1,5 +1,5 @@
 import { Box, Button, Container, TextField, Typography } from "@material-ui/core";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { LoginContext } from "../Context/LoginContext";
 import { useStyles } from "./styles";
@@ -15,49 +15,76 @@ const Login = () => {
     const [user, setUser] = useState([])
     const { setIsLog } = useContext(LoginContext)
 
+    useEffect(() => {
+        console.log(user)
+    }, [user])
+
     const showPass = () => {
         setType(type === 'password' ? 'text' : 'password')
     }
     const handleAuthorization = (userEmail, userPassword) => {
 
-        const users = JSON.parse(localStorage.getItem('user'))
-        const emailArr = users.map(({ email }) => email)
-
-        if (pathname === '/register') {
-            if ((emailArr.indexOf(userEmail)) === -1) {
+        if (!localStorage.getItem('user')) {
+            if (pathname === '/login') {
+                alert('Зарегистрируйтесь')
+                navigate('/register')
+                setEmail('')
+                setPassword('')
+                setRepeatedPassword('')
+            }
+            else {
                 if (password === repeatedPassword) {
                     console.log('email = ', email, 'password =', password)
                     const tempUser = { email: email, password: password }
-                    const users = JSON.parse(localStorage.getItem('user'))
-                    setUser(
-                        [...user, tempUser]
-                    )
-                    localStorage.setItem('user', users ? JSON.stringify([...users, tempUser]) : JSON.stringify([tempUser]))
+                    setUser(...user, tempUser)
+                    localStorage.setItem('user', JSON.stringify([tempUser]))
                     setIsLog(true)
                     localStorage.setItem('isLog', 'true')
                     navigate('/')
                     alert('Вы зарегестрированы')
                 }
-                else {
-                    console.log('Wrong password')
-                    alert('Wrong password')
-                }
-            }
-            else alert('Такой логин уже существует')
-        }
-        else {
-            if ((emailArr.indexOf(userEmail)) !== -1) {
-                const idx = emailArr.indexOf(userEmail)
-                if (users[idx].password === userPassword) {
-                    alert('Вы вошли в аккаунт')
-                    setIsLog(true)
-                    localStorage.setItem('isLog', 'true')
-                    navigate('/')
-                }
                 else alert('Неверный пароль')
             }
-            else alert('Неверный эмейл')
         }
+        else {
+            let users = JSON.parse(localStorage.getItem('user'))
+            const emailArr = users.map(({ email }) => email)
+            if (pathname === '/register') {
+                if ((emailArr.indexOf(userEmail)) === -1) {
+                    if (password === repeatedPassword) {
+                        console.log('email = ', email, 'password =', password)
+                        const tempUser = { email: email, password: password }
+                        users = JSON.parse(localStorage.getItem('user'))
+                        setUser(
+                            [...user, tempUser]
+                        )
+                        localStorage.setItem('user', users ? JSON.stringify([...users, tempUser]) : JSON.stringify([tempUser]))
+                        setIsLog(true)
+                        localStorage.setItem('isLog', 'true')
+                        navigate('/')
+                        alert('Вы зарегестрированы')
+                    }
+                    else {
+                        alert('Wrong password')
+                    }
+                }
+                else alert('Такой логин уже существует')
+            }
+            else {
+                if ((emailArr.indexOf(userEmail)) !== -1) {
+                    const idx = emailArr.indexOf(userEmail)
+                    if (users[idx].password === userPassword) {
+                        alert('Вы вошли в аккаунт')
+                        setIsLog(true)
+                        localStorage.setItem('isLog', 'true')
+                        navigate('/')
+                    }
+                    else alert('Неверный пароль')
+                }
+                else alert('Неверный эмейл')
+            }
+        }
+
     }
     return (
         <Box>
